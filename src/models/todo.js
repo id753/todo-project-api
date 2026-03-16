@@ -1,4 +1,4 @@
-import { Schema, model } from 'mongoose';
+import { model, Schema } from 'mongoose';
 
 const todoSchema = new Schema(
   {
@@ -8,22 +8,13 @@ const todoSchema = new Schema(
       trim: true,
       maxlength: [100, 'Title cannot be more than 100 characters'],
     },
-    content: {
-      type: String,
-      // required: [true, 'Content is required'],
+    completed: {
+      type: Boolean,
+      default: false,
     },
-    categoryId: {
-      type: String,
-      required: true,
-      enum: ['0', '1', '2', '3', '4', '5'],
-    },
-    userId: {
-      type: Schema.Types.ObjectId,
-      ref: 'User',
-    },
-    tags: {
-      type: String,
-      default: '',
+    isFavorite: {
+      type: Boolean,
+      default: false,
     },
   },
   {
@@ -31,7 +22,6 @@ const todoSchema = new Schema(
     versionKey: false,
   },
 );
+export const Todo = model('Draft', todoSchema);
 
-export const todo = model('todo', todoSchema);
-
-export default todo;
+export default Todo;
