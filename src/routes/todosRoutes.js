@@ -10,7 +10,7 @@ import {
   createtodoschema,
   todoIdParamSchema,
   updatetodoschema,
-} from '../validations/validations.js';
+} from '../validations/todoValidations.js';
 import { celebrate } from 'celebrate';
 
 const router = Router();
