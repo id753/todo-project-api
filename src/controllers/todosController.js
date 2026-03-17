@@ -3,19 +3,26 @@ import Todo from '../models/todo.js';
 
 // GET  ALL
 export const getTodos = async (req, res) => {
-  const { page = 1, perPage = 10 } = req.query;
+  const { page = 1, perPage = 10, filterId } = req.query;
 
   const skip = (page - 1) * perPage;
+  const todoQuery = Todo.find();
 
-  // Выполняем запросы параллельно для оптимизации
+  // filter
+  if (filterId === 'favorite') {
+    todoQuery.where('isFavorite').equals(true);
+  } else if (filterId === 'complete') {
+    todoQuery.where('completed').equals(true);
+  } else if (filterId === 'incomplete') {
+    todoQuery.where('completed').equals(false);
+  }
+
   const [totalItems, todos] = await Promise.all([
-    Todo.countDocuments(), // Считаем общее количество задач
-    Todo.find() // Получаем срез данных
-      .skip(skip)
-      .limit(perPage),
+    todoQuery.clone().countDocuments(),
+    todoQuery.skip(skip).limit(perPage),
   ]);
 
-  const totalPages = Math.ceil(totalItems / perPage) || 1; // Минимум 1 страница, даже если пусто
+  const totalPages = Math.ceil(totalItems / perPage) || 1;
 
   // 3. Отправляем ОДИН ответ со всеми данными
   res.status(200).json({

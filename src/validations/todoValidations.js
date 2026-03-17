@@ -43,5 +43,7 @@ export const getTodosSchema = {
   [Segments.QUERY]: Joi.object({
     page: Joi.number().integer().min(1),
     perPage: Joi.number().integer().min(1).max(50),
+
+    filterId: Joi.string().valid('all', 'favorite', 'incomplete', 'complete'),
   }),
 };
