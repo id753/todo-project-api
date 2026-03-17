@@ -1,5 +1,13 @@
 import { model, Schema } from 'mongoose';
 
+todoSchema.set('toJSON', {
+  virtuals: true, // Создает текстовое поле 'id' на основе '_id'
+  versionKey: false, // Убирает поле '__v'
+  transform: function (doc, ret) {
+    delete ret._id; // Удаляет оригинальный '_id', оставляя только 'id'
+  },
+});
+
 const todoSchema = new Schema(
   {
     title: {
