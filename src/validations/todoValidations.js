@@ -45,5 +45,7 @@ export const getTodosSchema = {
     perPage: Joi.number().integer().min(1).max(50),
 
     filterId: Joi.string().valid('all', 'favorite', 'incomplete', 'complete'),
+
+    search: Joi.string().allow('').max(50),
   }),
 };

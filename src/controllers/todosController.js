@@ -3,12 +3,12 @@ import Todo from '../models/todo.js';
 
 // GET  ALL
 export const getTodos = async (req, res) => {
-  const { page = 1, perPage = 10, filterId } = req.query;
+  const { page = 1, perPage = 10, filterId = 'all', search = '' } = req.query;
 
   const skip = (page - 1) * perPage;
   const todoQuery = Todo.find();
 
-  // filter
+  // Фильтрация
   if (filterId === 'favorite') {
     todoQuery.where('isFavorite').equals(true);
   } else if (filterId === 'complete') {
@@ -17,14 +17,19 @@ export const getTodos = async (req, res) => {
     todoQuery.where('completed').equals(false);
   }
 
+  // Поиск по title
+  if (search) {
+    todoQuery.where('title').regex(new RegExp(search, 'i'));
+  }
+
   const [totalItems, todos] = await Promise.all([
     todoQuery.clone().countDocuments(),
-    todoQuery.skip(skip).limit(perPage),
+    todoQuery.skip(skip).limit(perPage).sort({ createdAt: -1 }), // Новые задачи всегда сверху
   ]);
 
   const totalPages = Math.ceil(totalItems / perPage) || 1;
 
-  // 3. Отправляем ОДИН ответ со всеми данными
+  // Отправляем ОДИН ответ со всеми данными
   res.status(200).json({
     status: 200,
     message: 'Successfully found todos!',

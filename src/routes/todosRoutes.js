@@ -8,6 +8,7 @@ import {
 } from '../controllers/todosController.js';
 import {
   createtodoschema,
+  getTodosSchema,
   todoIdParamSchema,
   updatetodoschema,
 } from '../validations/todoValidations.js';
@@ -16,7 +17,7 @@ import { celebrate } from 'celebrate';
 const router = Router();
 
 // GET ВСЕХ
-router.get('/todos', getTodos);
+router.get('/todos', celebrate(getTodosSchema), getTodos);
 
 // GET ОДНОГО
 router.get('/todos/:todoId', celebrate(todoIdParamSchema), getTodoById);
