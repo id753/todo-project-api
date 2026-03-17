@@ -3,19 +3,24 @@ import Todo from '../models/todo.js';
 
 // GET  ALL
 export const getTodos = async (req, res) => {
-  const { page = 1, perPage = 10, filterId = 'all', search = '' } = req.query;
+  const {
+    page = 1,
+    perPage = 10,
+    // filterId = 'all',
+    search = '',
+  } = req.query;
 
   const skip = (page - 1) * perPage;
   const todoQuery = Todo.find();
 
   // Фильтрация
-  if (filterId === 'favorite') {
-    todoQuery.where('isFavorite').equals(true);
-  } else if (filterId === 'complete') {
-    todoQuery.where('completed').equals(true);
-  } else if (filterId === 'incomplete') {
-    todoQuery.where('completed').equals(false);
-  }
+  // if (filterId === 'favorite') {
+  //   todoQuery.where('isFavorite').equals(true);
+  // } else if (filterId === 'complete') {
+  //   todoQuery.where('completed').equals(true);
+  // } else if (filterId === 'incomplete') {
+  //   todoQuery.where('completed').equals(false);
+  // }
 
   // Поиск по title
   if (search) {

@@ -20,7 +20,7 @@ export const todoIdParamSchema = {
 // Валідація для POST
 export const createtodoschema = {
   [Segments.BODY]: Joi.object({
-    title: Joi.string().min(3).max(100).required(), // max змінено до 100, як у Mongoose
+    title: Joi.string().min(1).max(100).required(), // max змінено до 100, як у Mongoose
     completed: Joi.boolean().default(false),
     isFavorite: Joi.boolean().default(false),
   }),
@@ -44,7 +44,7 @@ export const getTodosSchema = {
     page: Joi.number().integer().min(1),
     perPage: Joi.number().integer().min(1).max(50),
 
-    filterId: Joi.string().valid('all', 'favorite', 'incomplete', 'complete'),
+    // filterId: Joi.string().valid('all', 'favorite', 'incomplete', 'complete'),
 
     search: Joi.string().allow('').max(50),
   }),
