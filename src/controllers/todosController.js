@@ -3,8 +3,35 @@ import Todo from '../models/todo.js';
 
 // GET  ALL
 export const getTodos = async (req, res) => {
-  const data = await Todo.find();
-  res.status(200).json(data);
+  const { page = 1, perPage = 10 } = req.query;
+
+  const skip = (page - 1) * perPage;
+
+  // Выполняем запросы параллельно для оптимизации
+  const [totalItems, todos] = await Promise.all([
+    Todo.countDocuments(), // Считаем общее количество задач
+    Todo.find() // Получаем срез данных
+      .skip(skip)
+      .limit(perPage),
+  ]);
+
+  const totalPages = Math.ceil(totalItems / perPage) || 1; // Минимум 1 страница, даже если пусто
+
+  // 3. Отправляем ОДИН ответ со всеми данными
+  res.status(200).json({
+    status: 200,
+    message: 'Successfully found todos!',
+    data: {
+      todos,
+      page,
+      perPage,
+      totalItems,
+      totalPages,
+
+      hasNextPage: page < totalPages,
+      hasPreviousPage: page > 1,
+    },
+  });
 };
 
 // GET ID

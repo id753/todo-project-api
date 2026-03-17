@@ -37,3 +37,11 @@ export const updatetodoschema = {
     isFavorite: Joi.boolean(),
   }).min(1), // Хоча б одне поле має бути присутнім для оновлення
 };
+
+// Валідація для GET c pagination
+export const getTodosSchema = {
+  [Segments.QUERY]: Joi.object({
+    page: Joi.number().integer().min(1),
+    perPage: Joi.number().integer().min(1).max(50),
+  }),
+};
