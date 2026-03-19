@@ -11,7 +11,6 @@
 ### Backend Experience
 - ⚙️ **REST API:** Implemented CRUD operations for todos with proper routing.  
 - 🗄 **Database Integration:** MongoDB & Mongoose for data modeling and persistence.  
-- 🔍 **Search & Pagination:** Implemented filtering, search (regex), and paginated results.
 - 🛡 **Validation:** Joi & Celebrate to ensure data integrity.  
 - ❌ **Error Handling:** Custom middleware + http-errors for consistent responses.  
 - 📝 **Logging:** Pino for request and error logging.
