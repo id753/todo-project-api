@@ -5,7 +5,7 @@
 ## ⚙️ [Frontend Repository](https://github.com/id753/todo-project)
 
 ##  Backend Tech Stack
-### Node.js, Express.js, MongoDB, Mongoose; REST API; Validation (Joi, Celebrate); Logging (Pino); Error Handling; Pagination & Search; API Testing (Postman); Deployment (Render) 
+### Node.js, Express.js, MongoDB, Mongoose; REST API; Validation (Joi, Celebrate); Logging (Pino); Environment & Middleware (dotenv, CORS, http-errors); API Testing (Postman); Deployment (Render)
 
 ## Features
 ### Backend Experience
