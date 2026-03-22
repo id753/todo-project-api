@@ -1,5 +1,5 @@
-# API Todo App | Multiple Implementations
-## A REST API for a Todo List application that supports full CRUD operations (Create, Read, Update, Delete) along with additional features like marking tasks as completed, toggling favorites, and advanced filtering.
+# API ✏️ Todo App | Multiple Implementations
+## A REST API for a Todo List 📋 application that supports full CRUD operations (Create, Read, Update, Delete) along with additional features like marking tasks as completed, toggling favorites, and advanced filtering.
 
 ## 🎨 [Live Project](https://todo-project-api-x8pg.onrender.com/todos)
 ## ⚙️ [Frontend Repository](https://github.com/id753/todo-project)
